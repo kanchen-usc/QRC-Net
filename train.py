@@ -24,8 +24,8 @@ class Config(object):
     sen_dir = './annotation'
     train_file_list = 'flickr30k_train_val.lst'
     test_file_list = 'flickr30k_test.lst'
-    log_file = './log/ground_r_supervised'
-    save_path = './model/ground_r_supervised'
+    log_file = './log/ground_supervised'
+    save_path = './model/ground_supervised'
     vocab_size = 17869    
     num_epoch = 3
     max_step = 40000
