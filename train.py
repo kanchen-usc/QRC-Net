@@ -80,49 +80,6 @@ def eval_cur_batch(gt_label, cur_logits,
         accu /= float(num_sample)
     return accu
 
-def eval_cur_batch_nms(gt_label, cur_logits, 
-    is_train=True, num_sample=0, pos_or_reg=None,
-    bbx_loc=None, gt_loc_all=None):
-    accu = 0.0
-    if is_train:
-        res_prob = cur_logits[:, :, 0]
-        res_label = np.argmax(res_prob, axis=1)        
-        accu = float(np.sum(res_label == gt_label)) / float(len(gt_label))
-    else:
-        num_bbx = len(bbx_loc)
-        att_scores = cur_logits[:, :num_bbx, :]
-        for gt_id in range(len(pos_or_reg)):
-            cur_gt_pos = gt_label[gt_id]
-            success = False
-            
-            cur_prob = att_scores[gt_id, :, 0]
-            cur_reg_all = att_scores[gt_id, :, 1:]
-
-            cur_gt = gt_loc_all[gt_id]
-            iou_all = np.zeros(num_bbx, dtype=float)
-            cur_reg_box_all = np.zeros((num_bbx, 5), dtype=float)
-            cur_reg_box_all[:, 4] = cur_prob
-
-            if np.any(cur_gt):
-                for box_id in range(num_bbx):
-                    cur_bbx = bbx_loc[box_id]
-                    cur_reg = cur_reg_all[box_id]
-                    cur_reg[:2] = cur_reg[:2]/2.0
-                    cur_reg[2:] = -cur_reg[2:]
-                    iou, reg_box = calc_iou_by_reg_feat(cur_gt, cur_bbx, cur_reg)
-                    iou_all[box_id] = iou
-                    cur_reg_box_all[box_id, :4] = reg_box
-
-                pick_ids = nms(cur_reg_box_all, 0.4)
-                pick_ind = np.argmax(cur_reg_box_all[pick_ids, 4])
-                if iou_all[pick_ids[pick_ind]] > 0.5:
-                    success = True
-            if success:
-                accu += 1.0
-
-        accu /= float(num_sample)
-    return accu
-
 def load_img_id_list(file_list):
     img_list = []
     with open(file_list) as fin:
