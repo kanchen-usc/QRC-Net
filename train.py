@@ -89,7 +89,6 @@ def load_img_id_list(file_list):
     return img_list
 
 def run_eval(sess, dataprovider, model, eval_op, feed_dict):
-    accu = 0.0
     num_test = 0.0
     num_corr_all = 0.0
     num_cnt_all = 0.0
@@ -120,14 +119,12 @@ def run_eval(sess, dataprovider, model, eval_op, feed_dict):
 
             num_valid = np.sum(np.all(gt_loc_all, 1))
             print '%d/%d: %d/%d, %.4f'%(img_ind, len(dataprovider.test_list), num_valid, num_sample, cur_accuracy)
-            accu += cur_accuracy
             num_corr_all += cur_accuracy*num_sample_all
             num_cnt_all += float(num_sample_all)
 
-    accu /= num_test
-    accu2 = num_corr_all/num_cnt_all
-    print 'Accuracy = %.4f, %.4f'%(accu, accu2)
-    return accu, accu2
+    accu = num_corr_all/num_cnt_all
+    print 'Accuracy = %.4f'%(accu)
+    return accu
 
 def run_training():
     train_list = []
@@ -197,8 +194,8 @@ def run_training():
 
             if ((step)%600)==0:
                 print "-----------------------------------------------"
-                eval_accu, eval_accu2 = run_eval(sess, cur_dataset, model, logits, feed_dict)
-                log.write('%d/%d: %.4f, %.4f, %.4f\n'%(step+1, cur_dataset.epoch_id, loss_value, eval_accu, eval_accu2))
+                eval_accu = run_eval(sess, cur_dataset, model, logits, feed_dict)
+                log.write('%d/%d: %.4f, %.4f\n'%(step+1, cur_dataset.epoch_id, loss_value, eval_accu))
                 print "-----------------------------------------------"
                 model.batch_size = config.batch_size
                 cur_dataset.is_save = False
