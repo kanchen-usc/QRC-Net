@@ -16,11 +16,11 @@ This repository contains the implementation of *Query-guided Regression Network 
 
 For training, please enter the root folder of ```QRC-Net```, then type
 ```
-$ python train.py -m [Model Name] -r [Reward value] -g [GPU ID]
+$ python train.py -m [Model Name] -g [GPU ID]
 ```
 For testing, please entre the root folder of ```QRC-Net```, then type
 ```
-$ python evaluate.py -m [Model Name] -r [Reward value] -g [GPU ID] --restore_id [Restore epoch ID]
+$ python evaluate.py -m [Model Name] -g [GPU ID] --restore_id [Restore epoch ID]
 ```
 Make sure the model name entered for evaluation is the same as the model name in training, and the epoch id exists.
 
