@@ -14,6 +14,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-m", "--model_name", type=str, default='qrc')
 parser.add_argument("-r", "--reward_con", type=float, default=0.2)
 parser.add_argument("-g", "--gpu", type=str, default='0')
+parser.add_argument("--restore_id", type=int, default=0)
 args = parser.parse_args()
 
 os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
@@ -142,7 +143,7 @@ def run_training():
     config.is_multi = True
     config.reward_con = args.reward_con
     log = open(log_file, 'w', 0)
-    restore_id = 0
+    restore_id = args.restore_id
 
     cur_dataset = dataprovider(train_list, test_list, config.img_feat_dir, config.sen_dir, config.vocab_size,
                                 reward_con=config.reward_con, batch_size=config.batch_size)
