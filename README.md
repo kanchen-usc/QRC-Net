@@ -9,7 +9,7 @@ This repository contains the implementation of *Query-guided Regression Network 
 **Platform:** Tensorflow-1.0.1<br/>
 **Visual features:** We use [Faster-RCNN](https://github.com/endernewton/tf-faster-rcnn) fine-tuned on [Flickr30K Entities](http://web.engr.illinois.edu/~bplumme2/Flickr30kEntities/). Afer fine-tuning, please put visual features in the ```feature``` directory (More details can be seen in the [```README.md```](./feature/README.md) in this directory).<br/>
 **Sentence features:** We encode one-hot vector for each query, as well as the annotation for each query and image pair. Pleae put the encoded features in the ```annotation``` directory (More details are provided in the [```README.md```](./annotation/README.md) in this directory).<br/>
-**File List:** We generate a file list for each image in the Flickr30K Entities. If you would like to train and test on other dataset (e.g. [Referit Game](http://tamaraberg.com/referitgame/)), please follow the similar format in the ```flickr_train_val.lst``` and ```flickr_test.lst```.<br/>
+**File list:** We generate a file list for each image in the Flickr30K Entities. If you would like to train and test on other dataset (e.g. [Referit Game](http://tamaraberg.com/referitgame/)), please follow the similar format in the ```flickr_train_val.lst``` and ```flickr_test.lst```.<br/>
 **Hyper parameters:** Please check the ```Config``` class in the ```train.py```.
 
 ## Training & Test
