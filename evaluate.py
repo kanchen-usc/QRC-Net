@@ -156,6 +156,7 @@ def run_evaluate():
         # Run the Op to initialize the variables.
         saver = tf.train.Saver(max_to_keep=20)
         duration = 0.0
+        feed_dict = update_feed_dict(cur_dataset, model, True)
 
         print 'Restore model_%d'%restore_id
         cur_dataset.is_save = False
