@@ -155,7 +155,6 @@ def run_evaluate():
         sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
         # Run the Op to initialize the variables.
         saver = tf.train.Saver(max_to_keep=20)
-        duration = 0.0
         feed_dict = update_feed_dict(cur_dataset, model, True)
 
         print 'Restore model_%d'%restore_id
