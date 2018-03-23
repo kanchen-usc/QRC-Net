@@ -24,7 +24,7 @@ $ python evaluate.py -m [Model Name] -g [GPU ID] --restore_id [Restore epoch ID]
 ```
 Make sure the model name entered for evaluation is the same as the model name in training, and the epoch id exists.
 
-## Citation
+## Reference
 
 If you find the repository is useful for your research, please consider citing the following work:
 ```
