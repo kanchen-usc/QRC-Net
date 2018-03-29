@@ -4,7 +4,7 @@ This repository contains the implementation of *Query-guided Regression Network 
 
 ## Setup
 
-*Note*: Please read the feature representation files in ```feature``` and ```annotation``` directories before using the code.
+> Note: Please read the feature representation files in ```feature``` and ```annotation``` directories before using the code.
 
 **Platform:** Tensorflow-1.0.1 (python 2.7)<br/>
 **Visual features:** We use [Faster-RCNN](https://github.com/endernewton/tf-faster-rcnn) fine-tuned on [Flickr30K Entities](http://web.engr.illinois.edu/~bplumme2/Flickr30kEntities/). Afer fine-tuning, please put visual features in the ```feature``` directory (More details and *download links* are provided in the [```README.md```](./feature/README.md) in this directory).<br/>
